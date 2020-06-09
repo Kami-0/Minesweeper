@@ -1,0 +1,10 @@
+jar {
+    manifest {
+        attributes("Implementation-Title": "Minesweeper",
+                "Implementation-Version": 1.0,
+                "Main-Class": "ru.kami.minesweeper.Minesweeper")
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
