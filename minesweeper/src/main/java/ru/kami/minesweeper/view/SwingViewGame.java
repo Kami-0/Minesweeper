@@ -1,7 +1,7 @@
 package ru.kami.minesweeper.view;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.kami.minesweeper.controller.Controller;
+import ru.kami.minesweeper.model.MinesweeperManager;
 import ru.kami.minesweeper.view.adapter.CellMouseAdapter;
 import ru.kami.minesweeper.view.adapter.MenuMouseAdapter;
 import ru.kami.minesweeper.view.constant.GlobalConstants;
@@ -25,7 +25,7 @@ import static ru.kami.minesweeper.view.constant.GameGridPanelConstants.*;
 @Slf4j
 public class SwingViewGame extends JFrame implements GameView {
     private final CellView[][] cellViews;
-    private final Controller controller;
+    private final MinesweeperManager minesweeperManager;
     private final int rowNumber;
     private final int columnNumber;
     private final JPanel container;
@@ -35,17 +35,17 @@ public class SwingViewGame extends JFrame implements GameView {
     private final GameNewDialog gameNewDialog;
     private final RulesDialog rulesDialog;
 
-    public SwingViewGame(Controller controller, int rowNumber, int columnNumber) {
+    public SwingViewGame(MinesweeperManager minesweeperManager, int rowNumber, int columnNumber) {
         super(UIConstants.APP_NAME);
+        this.minesweeperManager = minesweeperManager;
         this.cellViews = new CellView[rowNumber][columnNumber];
-        this.controller = controller;
         this.rowNumber = rowNumber;
         this.columnNumber = columnNumber;
         this.container = new JPanel(new GridBagLayout());
         this.minCounter = new UiJLabel();
         this.timer = new UiJLabel();
         this.aboutDialog = new AboutDialog(this);
-        this.gameNewDialog = new GameNewDialog(this, controller);
+        this.gameNewDialog = new GameNewDialog(this, minesweeperManager);
         this.rulesDialog = new RulesDialog(this);
 
         packInFrameContainer();
@@ -56,7 +56,7 @@ public class SwingViewGame extends JFrame implements GameView {
         JPanel gameGridPanel = renderGameGridPanel();
         UiIconJLabel timerUiIconJLabel = new UiIconJLabel(UIConstants.TIMER_ICON_CODE);
         UiIconJLabel minUiIconJLabel = new UiIconJLabel(UIConstants.MIN_ICON_CODE);
-        GameRestartJButton gameRestartJButton = new GameRestartJButton(this, controller);
+        GameRestartJButton gameRestartJButton = new GameRestartJButton(this, minesweeperManager);
 
         container.add(gameGridPanel, getContainerGridBagConstrains(UIConstants.GAME_GRID_X, UIConstants.GAME_GRID_Y, UIConstants.GAME_GRID_WIDTH, UIConstants.GAME_GRID_HEIGHT));
         container.add(minUiIconJLabel, getContainerGridBagConstrains(UIConstants.MIN_ICON_GRID_X, UIConstants.MIN_ICON_GRID_Y, UIConstants.MIN_ICON_GRID_WIDTH, UIConstants.MIN_ICON_GRID_HEIGHT));
@@ -98,7 +98,7 @@ public class SwingViewGame extends JFrame implements GameView {
                     log.error("Ошибка в получении иконки c кодом: {}", INITIAL_CELL_IMAGE_CODE);
                 }
 
-                CellMouseAdapter cellMouseAdapter = new CellMouseAdapter(controller, cellView);
+                CellMouseAdapter cellMouseAdapter = new CellMouseAdapter(minesweeperManager, cellView);
                 List<MouseAdapter> mouseAdapterList = cellMouseAdapter.getCellMouseAdapterList();
                 mouseAdapterList.forEach(cellView::addMouseListener);
 
@@ -153,7 +153,7 @@ public class SwingViewGame extends JFrame implements GameView {
     }
 
     private void setMouseAdapterToJMenu(JMenuItem jMenuItem, String code) {
-        MenuMouseAdapter menuMouseAdapter = new MenuMouseAdapter(controller, this);
+        MenuMouseAdapter menuMouseAdapter = new MenuMouseAdapter(this);
         Optional<MouseAdapter> mouseAdapterOptional = menuMouseAdapter.getMenuMouseAdapterMap(jMenuItem.getText());
 
         if (mouseAdapterOptional.isPresent()) {

@@ -1,6 +1,5 @@
 package ru.kami.minesweeper.view.adapter;
 
-import ru.kami.minesweeper.controller.Controller;
 import ru.kami.minesweeper.view.SwingViewGame;
 
 import java.awt.event.MouseAdapter;
@@ -11,11 +10,9 @@ import java.util.Optional;
 
 public class MenuMouseAdapter {
     private final Map<String, MouseAdapter> jMenuItemMouseAdapterMap = new HashMap<>();
-    private final Controller controller;
     private final SwingViewGame game;
 
-    public MenuMouseAdapter(Controller controller, SwingViewGame game) {
-        this.controller = controller;
+    public MenuMouseAdapter(SwingViewGame game) {
         this.game = game;
     }
 
@@ -24,7 +21,7 @@ public class MenuMouseAdapter {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    controller.handleUserClickedOnExitMenuItemLeftMouseButton();
+                    System.exit(0);
                 }
             }
         });

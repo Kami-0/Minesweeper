@@ -1,6 +1,6 @@
 package ru.kami.minesweeper.view.entity;
 
-import ru.kami.minesweeper.controller.Controller;
+import ru.kami.minesweeper.model.MinesweeperManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,12 +9,12 @@ import java.awt.event.ActionListener;
 
 public class GameRestartJButton extends JButton {
     private static final String BUTTON_TITLE = "Restart";
-    private final Controller controller;
+    private final MinesweeperManager minesweeperManager;
     private final Frame owner;
 
-    public GameRestartJButton(Frame owner, Controller controller) {
+    public GameRestartJButton(Frame owner, MinesweeperManager minesweeperManager) {
         super(BUTTON_TITLE);
-        this.controller = controller;
+        this.minesweeperManager = minesweeperManager;
         this.owner = owner;
         setToolTipText("Restarting the current game");
     }
@@ -23,7 +23,7 @@ public class GameRestartJButton extends JButton {
         addActionListener((new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.handleUserGameRestart();
+                minesweeperManager.createNewGame();
                 owner.setVisible(false);
                 owner.dispose();
             }

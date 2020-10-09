@@ -1,9 +1,9 @@
 package ru.kami.minesweeper.view.adapter;
 
 import lombok.Getter;
-import ru.kami.minesweeper.controller.Controller;
-import ru.kami.minesweeper.view.entity.CellView;
+import ru.kami.minesweeper.model.MinesweeperManager;
 import ru.kami.minesweeper.view.constant.MouseButtonConstants;
+import ru.kami.minesweeper.view.entity.CellView;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class CellMouseAdapter {
-    private final Controller controller;
+    private final MinesweeperManager minesweeperManager;
     private final CellView cellView;
     @Getter
     private final List<MouseAdapter> cellMouseAdapterList = new ArrayList<>();
 
-    public CellMouseAdapter(Controller controller, CellView cellView) {
-        this.controller = controller;
+    public CellMouseAdapter(MinesweeperManager minesweeperManager, CellView cellView) {
+        this.minesweeperManager = minesweeperManager;
         this.cellView = cellView;
     }
 
@@ -25,19 +25,19 @@ public final class CellMouseAdapter {
         cellMouseAdapterList.add(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                controller.handleUserEnteredOnCell(cellView.getRow(), cellView.getColumn());
+                minesweeperManager.notifyViewEnteredOnCell(cellView.getRow(), cellView.getColumn(), true);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                controller.handleUserExitedOnCell(cellView.getRow(), cellView.getColumn());
+                minesweeperManager.notifyViewEnteredOnCell(cellView.getRow(), cellView.getColumn(), false);
             }
         });
         cellMouseAdapterList.add(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getButton() == MouseButtonConstants.LEFT_MOUSE_BUTTON) {
-                    controller.handleUserClickedOnCellLeftMouseButton(cellView.getRow(), cellView.getColumn());
+                    minesweeperManager.openCell(cellView.getRow(), cellView.getColumn());
                 }
             }
         });
@@ -45,7 +45,7 @@ public final class CellMouseAdapter {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseButtonConstants.MOUSE_WHEEL) {
-                    controller.handleUserClickedOnCellMouseWheel(cellView.getRow(), cellView.getColumn());
+                    minesweeperManager.openAroundCell(cellView.getRow(), cellView.getColumn());
                 }
             }
         });
@@ -53,7 +53,7 @@ public final class CellMouseAdapter {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getButton() == MouseButtonConstants.RIGHT_MOUSE_BUTTON) {
-                    controller.handleUserClickedOnCellRightMouseButton(cellView.getRow(), cellView.getColumn());
+                    minesweeperManager.setFlag(cellView.getRow(), cellView.getColumn());
                 }
             }
         });
@@ -66,7 +66,7 @@ public final class CellMouseAdapter {
                 if (pressed.size() > 1) {
                     if (pressed.get(0) == MouseButtonConstants.LEFT_MOUSE_BUTTON && pressed.get(1) == MouseButtonConstants.MOUSE_WHEEL
                             || pressed.get(0) == MouseButtonConstants.MOUSE_WHEEL && pressed.get(1) == MouseButtonConstants.LEFT_MOUSE_BUTTON) {
-                        controller.handleUserClickedOnCellRMBAndLMB(cellView.getRow(), cellView.getColumn());
+                        minesweeperManager.openAroundCell(cellView.getRow(), cellView.getColumn());
                     }
                 }
             }

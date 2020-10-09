@@ -1,13 +1,11 @@
 package ru.kami.minesweeper.view;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.kami.minesweeper.view.constant.AboutDialogConstants;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static ru.kami.minesweeper.view.constant.AboutDialogConstants.DIALOG_TITLE;
-import static ru.kami.minesweeper.view.constant.AboutDialogConstants.FONT;
+import static ru.kami.minesweeper.view.constant.AboutDialogConstants.*;
 
 @Slf4j
 class AboutDialog extends JDialog {
@@ -15,13 +13,12 @@ class AboutDialog extends JDialog {
         super(owner, DIALOG_TITLE, true);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(AboutDialogConstants.DIALOG_WIDTH, AboutDialogConstants.DIALOG_HEIGHT);
+        setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
         setResizable(false);
         setLocationRelativeTo(owner);
 
         JTextArea textField = new JTextArea();
-        textField.setText("Made to order by Focus Start in 2020" + System.lineSeparator() +
-                "Author: Makarov Daniil (Kami)");
+        textField.setText("Author: Nikita Yankov");
         textField.setEditable(false);
         textField.setFont(FONT);
         add(textField);

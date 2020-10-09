@@ -1,7 +1,6 @@
 package ru.kami.minesweeper.view;
 
-import lombok.extern.slf4j.Slf4j;
-import ru.kami.minesweeper.controller.Controller;
+import ru.kami.minesweeper.model.MinesweeperManager;
 import ru.kami.minesweeper.view.entity.GameNewEnterJButton;
 import ru.kami.minesweeper.view.entity.NumberJTextField;
 import ru.kami.minesweeper.view.icon.MinesweeperImageIconRegistry;
@@ -15,10 +14,9 @@ import java.util.Optional;
 import static ru.kami.minesweeper.view.constant.GameNewUIConstants.*;
 import static ru.kami.minesweeper.view.constant.GlobalConstants.BACKGROUND_COLOR;
 
-@Slf4j
 class GameNewDialog extends JDialog {
 
-    public GameNewDialog(Frame owner, Controller controller) {
+    public GameNewDialog(Frame owner, MinesweeperManager minesweeperManager) {
         super(owner, DIALOG_TITLE, true);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -40,7 +38,7 @@ class GameNewDialog extends JDialog {
 
         GameNewEnterJButton enterButton = new GameNewEnterJButton(
                 owner,
-                controller,
+                minesweeperManager,
                 jNumberTextFieldMap.get(GameNewOptions.GRID_WIDTH),
                 jNumberTextFieldMap.get(GameNewOptions.GRID_HEIGHT),
                 jNumberTextFieldMap.get(GameNewOptions.MINES));
@@ -55,11 +53,7 @@ class GameNewDialog extends JDialog {
     private JLabel getJLabelWithIcon(GameNewOptions code) {
         JLabel jLabel = new JLabel();
         Optional<ImageIcon> imageIconOptional = MinesweeperImageIconRegistry.getNewGameOptionsImageIconMap(code);
-        if (imageIconOptional.isPresent()) {
-            jLabel.setIcon(imageIconOptional.get());
-        } else {
-            log.error("Ошибка в получении иконки c кодом: {},", code);
-        }
+        jLabel.setIcon(imageIconOptional.get());
         return jLabel;
     }
 }
