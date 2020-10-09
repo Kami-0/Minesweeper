@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Класс для хранения картинок
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MinesweeperImageIconRegistry {
     private static final Map<String, ImageIcon> cellIconMap = new HashMap<>();

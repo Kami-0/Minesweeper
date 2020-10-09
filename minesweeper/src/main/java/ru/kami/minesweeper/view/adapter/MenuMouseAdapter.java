@@ -52,14 +52,6 @@ public class MenuMouseAdapter {
                 }
             }
         });
-        jMenuItemMouseAdapterMap.put("High Scores", new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) {
-                    game.requestHighScore();
-                }
-            }
-        });
     }
 
     public Optional<MouseAdapter> getMenuMouseAdapterMap(String code) {

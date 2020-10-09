@@ -13,7 +13,7 @@ import static javax.swing.BoxLayout.Y_AXIS;
 
 @Slf4j
 class GameEndVictoryDialog extends JDialog {
-    GameEndVictoryDialog(Frame owner, int points) {
+    GameEndVictoryDialog(Frame owner) {
         super(owner, GameEndDialogConstants.WIN_DIALOG_TITLE, true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -27,8 +27,6 @@ class GameEndVictoryDialog extends JDialog {
             log.error("Ошибка в получении иконки c кодом: {}", GameEndDialogConstants.WIN_DIALOG_ICON_CODE);
         }
         JLabel result = new JLabel();
-        String resultString = "Your points: " + points;
-        result.setText(resultString);
         result.setFont(GlobalConstants.FONT);
         result.setForeground(Color.YELLOW);
         JPanel wrapper = new JPanel();

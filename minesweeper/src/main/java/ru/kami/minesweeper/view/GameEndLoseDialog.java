@@ -10,7 +10,6 @@ import java.util.Optional;
 import static ru.kami.minesweeper.view.constant.GameEndDialogConstants.LOSE_DIALOG_ICON_CODE;
 import static ru.kami.minesweeper.view.constant.GameEndDialogConstants.LOSE_DIALOG_TITLE;
 
-@SuppressWarnings("ALL")
 @Slf4j
 class GameEndLoseDialog extends JDialog {
     GameEndLoseDialog(Frame owner) {

@@ -3,6 +3,9 @@ package ru.kami.minesweeper.controller;
 import lombok.AllArgsConstructor;
 import ru.kami.minesweeper.model.MinesweeperManager;
 
+/**
+ * Контроллер прокидывает вызовы из view в model
+ */
 @AllArgsConstructor
 public class Controller {
     private final MinesweeperManager minesweeperManager;
@@ -29,10 +32,6 @@ public class Controller {
 
     public void handleUserClickedOnNewGame(int gridWidth, int gridHeight, int totalMines) {
         minesweeperManager.createNewGame(gridWidth, gridHeight, totalMines);
-    }
-
-    public void handleUserClickedOnHighScore() {
-        minesweeperManager.notifyViewHighScoreTable();
     }
 
     public void handleUserEnteredOnCell(int row, int column) {

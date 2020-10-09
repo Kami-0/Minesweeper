@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import ru.kami.minesweeper.api.CodeImageIcon;
-import ru.kami.minesweeper.api.Result;
 import ru.kami.minesweeper.app.Minesweeper;
 import ru.kami.minesweeper.model.constant.MinesweeperManagerConstants;
 import ru.kami.minesweeper.view.GameView;
@@ -21,7 +20,6 @@ public class MinesweeperManager {
     private final ViewCellModifier viewCellModifier;
     private final ViewNotifier viewNotifier;
     private final MinesweeperCell[][] minesweeperCells;
-    private final HighScoreTable highScoreTable;
     @Setter
     private Timer timer;
     private int closedCell;
@@ -39,7 +37,6 @@ public class MinesweeperManager {
         this.gameCellsAnalyzer = new GameCellsAnalyzer();
         this.viewCellModifier = new ViewCellModifier();
         this.viewNotifier = new ViewNotifier();
-        this.highScoreTable = new HighScoreTable();
         closedCell = rowNumber * columnNumber;
         minesweeperCells = new MinesweeperCell[rowNumber][columnNumber];
         minLeft = totalMin;
@@ -168,34 +165,11 @@ public class MinesweeperManager {
         if (!endGame) {
             endGame = true;
             if (win) {
-                createVictory();
+                viewNotifier.notifyViewsVictory();
             } else {
-                createLoss();
+                viewNotifier.notifyViewsLoss();
             }
         }
-    }
-
-    private void createVictory() {
-        log.info("Create victory");
-        int successRate = highScoreTable.calculateSuccessRate(rowNumber, columnNumber, totalMin, seconds);
-        int placeInHighScoreTable = highScoreTable.getPlaceInHighScoreTable(successRate);
-        //Метод getPlaceInHighScoreTable() возвращает -1 если результат не попал в таблицу рекордов.
-        if (placeInHighScoreTable == -1) {
-            viewNotifier.notifyViewsVictory(successRate);
-        } else {
-            viewNotifier.notifyViewsVictoryWithNewRecord(successRate);
-            Result result = new Result(playerName, rowNumber, columnNumber, totalMin, seconds, successRate);
-            highScoreTable.updateHighScore(result, placeInHighScoreTable);
-        }
-    }
-
-    private void createLoss() {
-        log.info("Create loss");
-        viewNotifier.notifyViewsLoss();
-    }
-
-    public void notifyViewHighScoreTable() {
-        viewNotifier.notifyViewsHighScore(highScoreTable.getTopFiveResults());
     }
 
     public void notifyViewEnteredOnCell(int row, int column, boolean status) {

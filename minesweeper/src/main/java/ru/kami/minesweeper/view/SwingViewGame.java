@@ -1,15 +1,16 @@
 package ru.kami.minesweeper.view;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.kami.minesweeper.api.Result;
 import ru.kami.minesweeper.controller.Controller;
 import ru.kami.minesweeper.view.adapter.CellMouseAdapter;
 import ru.kami.minesweeper.view.adapter.MenuMouseAdapter;
-import ru.kami.minesweeper.view.entity.*;
-import ru.kami.minesweeper.view.entity.*;
-import ru.kami.minesweeper.view.icon.MinesweeperImageIconRegistry;
 import ru.kami.minesweeper.view.constant.GlobalConstants;
 import ru.kami.minesweeper.view.constant.UIConstants;
+import ru.kami.minesweeper.view.entity.CellView;
+import ru.kami.minesweeper.view.entity.GameRestartJButton;
+import ru.kami.minesweeper.view.entity.UiIconJLabel;
+import ru.kami.minesweeper.view.entity.UiJLabel;
+import ru.kami.minesweeper.view.icon.MinesweeperImageIconRegistry;
 
 import javax.swing.*;
 import java.awt.*;
@@ -137,7 +138,6 @@ public class SwingViewGame extends JFrame implements GameView {
 
         List<JMenuItem> menuItemList = new ArrayList<>();
         menuItemList.add(new JMenuItem("New Game"));
-        menuItemList.add(new JMenuItem("High Scores"));
         menuItemList.add(new JMenuItem("Exit"));
         menuItemList.forEach(item -> {
             setMouseAdapterToJMenu(item, item.getText());
@@ -191,13 +191,8 @@ public class SwingViewGame extends JFrame implements GameView {
     }
 
     @Override
-    public void renderVictory(int successRate) {
-        new GameEndVictoryDialog(this, successRate);
-    }
-
-    @Override
-    public void renderVictoryWithNewRecord(int successRate) {
-        new GameEndVictoryWithNewRecordDialog(this, controller, successRate);
+    public void renderVictory() {
+        new GameEndVictoryDialog(this);
     }
 
     @Override
@@ -210,12 +205,4 @@ public class SwingViewGame extends JFrame implements GameView {
         }
     }
 
-    @Override
-    public void renderHighScore(Result[] results) {
-        new HighScoreTableDialog(this, ResultView.valueOf(results));
-    }
-
-    public void requestHighScore() {
-        controller.handleUserClickedOnHighScore();
-    }
 }

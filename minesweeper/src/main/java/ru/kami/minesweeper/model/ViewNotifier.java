@@ -31,16 +31,7 @@ final class ViewNotifier {
         views.forEach(GameView::renderLoss);
     }
 
-    void notifyViewsVictory(int successRate) {
-        views.forEach(crossView -> crossView.renderVictory(successRate));
+    void notifyViewsVictory() {
+        views.forEach(GameView::renderVictory);
     }
-
-    void notifyViewsVictoryWithNewRecord(int successRate) {
-        views.forEach(crossView -> crossView.renderVictoryWithNewRecord(successRate));
-    }
-
-    void notifyViewsHighScore(Result[] result) {
-        views.forEach(crossView -> crossView.renderHighScore(result));
-    }
-
 }
