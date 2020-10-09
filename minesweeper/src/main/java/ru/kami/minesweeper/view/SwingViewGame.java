@@ -1,6 +1,5 @@
 package ru.kami.minesweeper.view;
 
-import lombok.extern.slf4j.Slf4j;
 import ru.kami.minesweeper.model.MinesweeperManager;
 import ru.kami.minesweeper.view.adapter.CellMouseAdapter;
 import ru.kami.minesweeper.view.adapter.MenuMouseAdapter;
@@ -22,7 +21,6 @@ import java.util.Optional;
 import static java.awt.GridBagConstraints.WEST;
 import static ru.kami.minesweeper.view.constant.GameGridPanelConstants.*;
 
-@Slf4j
 public class SwingViewGame extends JFrame implements GameView {
     private final CellView[][] cellViews;
     private final MinesweeperManager minesweeperManager;
@@ -52,7 +50,6 @@ public class SwingViewGame extends JFrame implements GameView {
     }
 
     private void packInFrameContainer() {
-        log.info("Frame rendering started ..");
         JPanel gameGridPanel = renderGameGridPanel();
         UiIconJLabel timerUiIconJLabel = new UiIconJLabel(UIConstants.TIMER_ICON_CODE);
         UiIconJLabel minUiIconJLabel = new UiIconJLabel(UIConstants.MIN_ICON_CODE);
@@ -71,7 +68,6 @@ public class SwingViewGame extends JFrame implements GameView {
         add(container);
 
         pack();
-        log.info("Frame rendering has ended ..");
     }
 
     private GridBagConstraints getContainerGridBagConstrains(int gridX, int gridY, int gridWidth, int gridHeight) {
@@ -92,11 +88,7 @@ public class SwingViewGame extends JFrame implements GameView {
                 cellView.setPreferredSize(new Dimension(ACTIVE_CELL_WIDTH, ACTIVE_CELL_HEIGHT));
 
                 Optional<ImageIcon> imageIconOptional = MinesweeperImageIconRegistry.getCellIconMap(INITIAL_CELL_IMAGE_CODE);
-                if (imageIconOptional.isPresent()) {
-                    cellView.setIcon(imageIconOptional.get());
-                } else {
-                    log.error("Ошибка в получении иконки c кодом: {}", INITIAL_CELL_IMAGE_CODE);
-                }
+                cellView.setIcon(imageIconOptional.get());
 
                 CellMouseAdapter cellMouseAdapter = new CellMouseAdapter(minesweeperManager, cellView);
                 List<MouseAdapter> mouseAdapterList = cellMouseAdapter.getCellMouseAdapterList();
@@ -121,11 +113,7 @@ public class SwingViewGame extends JFrame implements GameView {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(UIConstants.LOCATION_X, UIConstants.LOCATION_Y);
         Optional<Image> imageOptional = MinesweeperImageIconRegistry.getGameImage();
-        if (imageOptional.isPresent()) {
-            setIconImage(imageOptional.get());
-        } else {
-            log.error("Ошибка в получении gameImage");
-        }
+        setIconImage(imageOptional.get());
         setVisible(true);
     }
 
@@ -155,12 +143,7 @@ public class SwingViewGame extends JFrame implements GameView {
     private void setMouseAdapterToJMenu(JMenuItem jMenuItem, String code) {
         MenuMouseAdapter menuMouseAdapter = new MenuMouseAdapter(this);
         Optional<MouseAdapter> mouseAdapterOptional = menuMouseAdapter.getMenuMouseAdapterMap(jMenuItem.getText());
-
-        if (mouseAdapterOptional.isPresent()) {
-            jMenuItem.addMouseListener(mouseAdapterOptional.get());
-        } else {
-            log.error("Ошибка в получении menuMouseAdapter c кодом: {}", code);
-        }
+        jMenuItem.addMouseListener(mouseAdapterOptional.get());
     }
 
     public void renderGameNewDialog() {
@@ -197,12 +180,7 @@ public class SwingViewGame extends JFrame implements GameView {
 
     @Override
     public void updateCell(int row, int column, String code) {
-        log.info("Cell update row: {} column: {} с кодом {}", row, column, code);
-        if (MinesweeperImageIconRegistry.getCellIconMap(code).isPresent()) {
-            cellViews[row][column].setIcon(MinesweeperImageIconRegistry.getCellIconMap(code).get());
-        } else {
-            log.error("Ошибка в получении иконки c кодом: {}", code);
-        }
+        cellViews[row][column].setIcon(MinesweeperImageIconRegistry.getCellIconMap(code).get());
     }
 
 }

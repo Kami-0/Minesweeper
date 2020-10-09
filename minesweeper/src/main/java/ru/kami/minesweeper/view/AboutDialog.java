@@ -1,13 +1,10 @@
 package ru.kami.minesweeper.view;
 
-import lombok.extern.slf4j.Slf4j;
-
 import javax.swing.*;
 import java.awt.*;
 
 import static ru.kami.minesweeper.view.constant.AboutDialogConstants.*;
 
-@Slf4j
 class AboutDialog extends JDialog {
     AboutDialog(Frame owner) {
         super(owner, DIALOG_TITLE, true);

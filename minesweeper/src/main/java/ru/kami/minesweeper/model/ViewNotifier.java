@@ -1,7 +1,6 @@
 package ru.kami.minesweeper.model;
 
 import lombok.NoArgsConstructor;
-import ru.kami.minesweeper.api.Result;
 import ru.kami.minesweeper.view.GameView;
 
 import java.util.ArrayList;

@@ -3,7 +3,6 @@ package ru.kami.minesweeper.model;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import ru.kami.minesweeper.api.CodeImageIcon;
 import ru.kami.minesweeper.app.Minesweeper;
 import ru.kami.minesweeper.model.constant.MinesweeperManagerConstants;
@@ -11,7 +10,6 @@ import ru.kami.minesweeper.view.GameView;
 
 import java.util.*;
 
-@Slf4j
 public class MinesweeperManager {
     private final int rowNumber;
     private final int columnNumber;
@@ -45,17 +43,14 @@ public class MinesweeperManager {
     }
 
     private void initializeGameCells() {
-        log.info("Game cells initialization started. Column number: {} row Number: {} ..", columnNumber, rowNumber);
         for (int i = 0; i < columnNumber; i++) {
             for (int j = 0; j < rowNumber; j++) {
                 minesweeperCells[j][i] = new MinesweeperCell(j, i);
             }
         }
-        log.info("Game cells initialization ended ..");
     }
 
     private void initializeMines() {
-        log.info("Mines initialization started.Count mines: {} ..", totalMin);
         int mines = totalMin;
         while (mines > 0) {
             Random random = new Random();
@@ -66,17 +61,14 @@ public class MinesweeperManager {
                 mines--;
             }
         }
-        log.info("Mines initialization ended ..");
     }
 
     public void createNewGame(int gridWidth, int gridHeight, int totalMines) {
-        log.info("Create new game grid width: {} grid height: {} total mines: {}", gridWidth, gridHeight, totalMines);
         String[] args = new String[]{String.valueOf(gridWidth), String.valueOf(gridHeight), String.valueOf(totalMines)};
         Minesweeper.main(args);
     }
 
     public void createNewGame() {
-        log.info("Create new game grid width: {} grid height: {} total mines: {}", columnNumber, rowNumber, totalMin);
         String[] args = new String[]{String.valueOf(columnNumber), String.valueOf(rowNumber), String.valueOf(totalMin)};
         Minesweeper.main(args);
     }
@@ -111,7 +103,6 @@ public class MinesweeperManager {
     }
 
     private void runTimer() {
-        log.info("Timer run..");
         Timer timer = new Timer();
         MinesweeperTimer minesweeperTimer = new MinesweeperTimer(this);
         timer.schedule(minesweeperTimer, MinesweeperManagerConstants.TIMER_DELAY, MinesweeperManagerConstants.TIMER_PERIOD);
@@ -233,7 +224,6 @@ public class MinesweeperManager {
                 cell.setOpened(true);
                 closedCell--;
             }
-            log.info("Open cell row: {}, column: {}", row, column);
             int minCounterNearCell = gameCellsAnalyzer.countHowManyMinesAroundCell(row, column);
             if (minCounterNearCell == 0) {
                 cell.setEmpty(true);
@@ -241,14 +231,12 @@ public class MinesweeperManager {
             }
             Optional<String> codeIconOpt = CodeImageIcon.getCodeIcon(minCounterNearCell);
             if (!codeIconOpt.isPresent()) {
-                log.error("Не удалось получить иконку c кодом {}", minCounterNearCell);
                 return;
             }
             viewNotifier.notifyViewNewCellStatus(row, column, codeIconOpt.get());
         }
 
         void openTheMinedCell(int row, int column) {
-            log.info("Open cell row: {}, column: {}", row, column);
             viewNotifier.notifyViewNewCellStatus(row, column, "bombed");
         }
 
@@ -281,7 +269,6 @@ public class MinesweeperManager {
         }
 
         void setFlag(int row, int column, boolean flag) {
-            log.info("Flag set row: {} column: {} flag: {}", row, column, flag);
             if (flag) {
                 viewNotifier.notifyViewNewCellStatus(row, column, "flagOn");
             } else {
