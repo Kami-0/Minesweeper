@@ -25,8 +25,6 @@ public class MinesweeperManager {
     private boolean endGame = false;
     @Setter
     private int seconds = 0;
-    @Setter
-    private String playerName;
 
     public MinesweeperManager(int rowNumber, int columnNumber, int totalMin) {
         this.rowNumber = rowNumber;
