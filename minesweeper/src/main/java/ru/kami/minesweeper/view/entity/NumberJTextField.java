@@ -19,24 +19,4 @@ public class NumberJTextField extends JTextField {
                         GameNewNumberJTextField.EMPTY_BORDER_BOTTOM,
                         GameNewNumberJTextField.EMPTY_BORDER_RIGHT)));
     }
-
-    public void createWarning() {
-        this.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.RED, GameNewNumberJTextField.WARNING_EMPTY_BORDER_THICKNESS),
-                BorderFactory.createEmptyBorder(
-                        GameNewNumberJTextField.WARNING_EMPTY_BORDER_TOP,
-                        GameNewNumberJTextField.WARNING_EMPTY_BORDER_LEFT,
-                        GameNewNumberJTextField.WARNING_EMPTY_BORDER_BOTTOM,
-                        GameNewNumberJTextField.WARNING_EMPTY_BORDER_RIGHT)));
-    }
-
-    public void cancelWarning() {
-        this.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createBevelBorder(BevelBorder.RAISED),
-                BorderFactory.createEmptyBorder(
-                        GameNewNumberJTextField.EMPTY_BORDER_TOP,
-                        GameNewNumberJTextField.EMPTY_BORDER_LEFT,
-                        GameNewNumberJTextField.EMPTY_BORDER_BOTTOM,
-                        GameNewNumberJTextField.EMPTY_BORDER_RIGHT)));
-    }
 }
