@@ -9,12 +9,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-
+ // класс отрабатывающий события связанные с нажатием кнопки мыши
 public final class CellMouseAdapter {
     private final MinesweeperManager minesweeperManager;
-    private final CellView cellView;
+    private final CellView cellView; // клетка
     @Getter
-    private final List<MouseAdapter> cellMouseAdapterList = new ArrayList<>();
+    private final List<MouseAdapter> cellMouseAdapterList = new ArrayList<>(); // список хранящий возможные события
 
     public CellMouseAdapter(MinesweeperManager minesweeperManager, CellView cellView) {
         this.minesweeperManager = minesweeperManager;
@@ -22,59 +22,40 @@ public final class CellMouseAdapter {
     }
 
     {
-        cellMouseAdapterList.add(new MouseAdapter() {
+        cellMouseAdapterList.add(new MouseAdapter() { // метод адд встроенный добавляет элемент в список
             @Override
+            // навод мыши на мыши на ячейку
             public void mouseEntered(MouseEvent e) {
                 minesweeperManager.notifyViewEnteredOnCell(cellView.getRow(), cellView.getColumn(), true);
+                // определяется какая именно ячейка была передана
             }
 
             @Override
+
             public void mouseExited(MouseEvent e) {
                 minesweeperManager.notifyViewEnteredOnCell(cellView.getRow(), cellView.getColumn(), false);
+                // определяется с какой именно ячейки убрали курсор
             }
         });
         cellMouseAdapterList.add(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(MouseEvent e) { // если нажатие на левую клавишу
                 if (e.getButton() == MouseButtonConstants.LEFT_MOUSE_BUTTON) {
                     minesweeperManager.openCell(cellView.getRow(), cellView.getColumn());
+                    // открывается выбранная клетка при нажатии
                 }
             }
         });
-        cellMouseAdapterList.add(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseButtonConstants.MOUSE_WHEEL) {
-                    minesweeperManager.openAroundCell(cellView.getRow(), cellView.getColumn());
-                }
-            }
-        });
+
         cellMouseAdapterList.add(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                // отрабатывает нажатие правой кнопки мыши, устанавливается флажок
                 if (e.getButton() == MouseButtonConstants.RIGHT_MOUSE_BUTTON) {
                     minesweeperManager.setFlag(cellView.getRow(), cellView.getColumn());
                 }
             }
         });
-        cellMouseAdapterList.add(new MouseAdapter() {
-            private final List<Integer> pressed = new ArrayList<>();
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-                pressed.add(e.getButton());
-                if (pressed.size() > 1) {
-                    if (pressed.get(0) == MouseButtonConstants.LEFT_MOUSE_BUTTON && pressed.get(1) == MouseButtonConstants.MOUSE_WHEEL
-                            || pressed.get(0) == MouseButtonConstants.MOUSE_WHEEL && pressed.get(1) == MouseButtonConstants.LEFT_MOUSE_BUTTON) {
-                        minesweeperManager.openAroundCell(cellView.getRow(), cellView.getColumn());
-                    }
-                }
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                pressed.clear();
-            }
-        });
     }
 }

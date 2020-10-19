@@ -5,6 +5,8 @@ import ru.kami.minesweeper.view.constant.HighScoreTableConstants;
 import javax.swing.*;
 import java.awt.*;
 
+// todo del
+
 class HighScoreTableValueJLabel extends JLabel {
 
     public HighScoreTableValueJLabel(String value) {

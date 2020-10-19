@@ -7,6 +7,7 @@ import java.awt.*;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class GlobalConstants {
+    //стиль текста при вводе текста в любое окно
     private static final String FONT_NAME = "TimesRoman";
     private static final int FONT_STYLE = Font.BOLD;
     private static final int FONT_SIZE = 22;

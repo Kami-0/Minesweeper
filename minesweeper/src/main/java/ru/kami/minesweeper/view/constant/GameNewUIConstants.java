@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class GameNewUIConstants {
+    // параметры окна появляющегося после нажатия на "новая игра"
     public static final String DIALOG_TITLE = "New Game";
     public static final int GRID_LAYOUT_ROWS = 3;
     public static final int GRID_LAYOUT_COLUMNS = 2;

@@ -5,7 +5,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 import static ru.kami.minesweeper.view.constant.DigitFilterConstants.*;
-
+// todo del
 class DigitFilterPlainDocument extends PlainDocument {
 
     @Override

@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
  * Кнопка начала новой игры
  */
 public class GameNewEnterJButton extends JButton {
+    // параметры кнопки новой игры (ширина, высота и т.д)
     private static final String BUTTON_TITLE = "Run";
     private final MinesweeperManager minesweeperManager;
     private final NumberJTextField width;
@@ -19,6 +20,7 @@ public class GameNewEnterJButton extends JButton {
     private final Frame owner;
 
     public GameNewEnterJButton(Frame owner, MinesweeperManager minesweeperManager, NumberJTextField width, NumberJTextField height, NumberJTextField mines) {
+       // создалась кнопка
         super(BUTTON_TITLE);
         this.minesweeperManager = minesweeperManager;
         this.width = width;
@@ -30,6 +32,7 @@ public class GameNewEnterJButton extends JButton {
     {
         addActionListener((new ActionListener() {
             @Override
+            // при задании параметров новой игры текст переводится в числа
             public void actionPerformed(ActionEvent e) {
                 int gridWidth = Integer.parseInt(width.getText());
                 int gridHeight = Integer.parseInt(height.getText());

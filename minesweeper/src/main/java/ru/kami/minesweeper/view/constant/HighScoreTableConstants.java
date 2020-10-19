@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import java.awt.*;
 import java.io.File;
+// todo del
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class HighScoreTableConstants {

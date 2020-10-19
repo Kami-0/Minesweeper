@@ -5,8 +5,10 @@ import ru.kami.minesweeper.view.GameView;
 
 import java.util.ArrayList;
 import java.util.List;
+// ????
 
 @NoArgsConstructor
+ // класс отвечающий за связывание логики и графической части
 final class ViewNotifier {
     private final List<GameView> views = new ArrayList<>();
 

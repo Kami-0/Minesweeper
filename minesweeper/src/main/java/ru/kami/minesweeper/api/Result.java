@@ -3,6 +3,7 @@ package ru.kami.minesweeper.api;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+//  todo dell
 
 @Getter
 @Setter

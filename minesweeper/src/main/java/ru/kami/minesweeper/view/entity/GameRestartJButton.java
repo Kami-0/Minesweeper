@@ -7,7 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameRestartJButton extends JButton {
+public class GameRestartJButton extends JButton { // класс рестарт игры, просто игра запускается заново с текущим
+    // количеством строк, столбцов, мин
     private static final String BUTTON_TITLE = "Restart";
     private final MinesweeperManager minesweeperManager;
     private final Frame owner;
@@ -16,7 +17,6 @@ public class GameRestartJButton extends JButton {
         super(BUTTON_TITLE);
         this.minesweeperManager = minesweeperManager;
         this.owner = owner;
-        setToolTipText("Restarting the current game");
     }
 
     {

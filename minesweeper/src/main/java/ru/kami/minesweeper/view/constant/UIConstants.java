@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.awt.*;
-
+// класс описывающий константы самого основного окна программы
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class UIConstants {
     public static final String APP_NAME = "Minesweeper";
@@ -14,8 +14,8 @@ public final class UIConstants {
     public static final int LOCATION_Y;
 
     static {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension dimension = toolkit.getScreenSize();
+        Toolkit toolkit = Toolkit.getDefaultToolkit(); //вычисляется середина рабочего окна, чтобы рабочая область
+        Dimension dimension = toolkit.getScreenSize(); // была в центре
         LOCATION_X = dimension.width / 2 - 250;
         LOCATION_Y = dimension.height / 2 - 250;
     }

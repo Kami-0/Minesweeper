@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class NumberJTextField extends JTextField {
     public NumberJTextField() {
+        // ячеки в которые вводится текст при создании новой игры
         super.setFont(GlobalConstants.FONT);
-        super.setDocument(new DigitFilterPlainDocument());
         super.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createBevelBorder(BevelBorder.RAISED),
                 BorderFactory.createEmptyBorder(

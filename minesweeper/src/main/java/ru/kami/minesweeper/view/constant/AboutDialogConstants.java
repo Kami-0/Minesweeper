@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 import java.awt.*;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PRIVATE) // описание окна об игре, параметры текст
 public final class AboutDialogConstants {
     public static final String DIALOG_TITLE = "About game";
     public static final int DIALOG_WIDTH = 300;

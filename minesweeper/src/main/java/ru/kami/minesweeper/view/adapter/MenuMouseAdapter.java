@@ -14,12 +14,13 @@ public class MenuMouseAdapter {
 
     public MenuMouseAdapter(SwingViewGame game) {
         this.game = game;
-    }
+    } // ссылка на графическую часть
 
     {
+
         jMenuItemMouseAdapterMap.put("Exit", new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(MouseEvent e) { // выход из игры
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     System.exit(0);
                 }
@@ -27,7 +28,7 @@ public class MenuMouseAdapter {
         });
         jMenuItemMouseAdapterMap.put("New Game", new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(MouseEvent e) { // создание новой игры
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     game.renderGameNewDialog();
                 }
@@ -35,7 +36,7 @@ public class MenuMouseAdapter {
         });
         jMenuItemMouseAdapterMap.put("About", new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(MouseEvent e) { // раздел об игре
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     game.renderAboutMenuDialog();
                 }
@@ -43,13 +44,15 @@ public class MenuMouseAdapter {
         });
         jMenuItemMouseAdapterMap.put("Rules", new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(MouseEvent e) { // окно с правилами
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     game.renderRulesMenuDialog();
                 }
             }
         });
     }
+
+
 
     public Optional<MouseAdapter> getMenuMouseAdapterMap(String code) {
         return Optional.ofNullable(jMenuItemMouseAdapterMap.get(code));

@@ -5,18 +5,20 @@ import lombok.Setter;
 
 @Getter
 public class MinesweeperCell {
-    private final int row;
-    private final int column;
-    @Setter
-    private boolean mined = false;
-    @Setter
-    private boolean opened = false;
-    @Setter
-    private boolean empty = false;
-    @Setter
-    private boolean flag = false;
 
-    MinesweeperCell(int row, int column) {
+    // Модель клетки
+    private final int row; //строка
+    private final int column; // столбец
+    @Setter
+    private boolean mined = false; // заминирована ли
+    @Setter
+    private boolean opened = false; // открыта ли
+    @Setter
+    private boolean empty = false; // пустая ли
+    @Setter
+    private boolean flag = false; // стоит ли флаг
+
+    MinesweeperCell(int row, int column) { // конструктор клетки
         this.row = row;
         this.column = column;
     }

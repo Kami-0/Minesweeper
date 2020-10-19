@@ -6,6 +6,7 @@ import ru.kami.minesweeper.view.constant.GlobalConstants;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+// todo del
 
 public class ResultView extends JPanel {
     private static final int PLAYER_NAME_LABEL_WIDTH = 130;
